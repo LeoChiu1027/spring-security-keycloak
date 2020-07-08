@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Spring Security Example</title>
+    </head>
+    <body>
+        <h1>Welcome!</h1>
+
+
+        <div>
+            User: <span sec:authentication="name">NOT FOUND</span>
+            Spring Roles: <span sec:authentication="principal.authorities">NOT FOUND</span>
+            <p th:text="${username}" />
+
+            <br>
+            User Token:
+            <p th:text="${userToken}" />
+        </div>
+        <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+
+        <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            This will only be displayed if authenticated user has role ROLE_ADMIN.
+        </div>
+        <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+            This will only be displayed if authenticated user has role ROLE_ADMIN.
+        </div>
+
+    </body>
+</html>
